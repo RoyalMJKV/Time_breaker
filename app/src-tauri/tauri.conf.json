@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "app",
+  "productName": "Eye Boy",
   "version": "0.1.0",
   "identifier": "com.lab.app",
   "build": {
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "app",
+        "title": "Eye Boy",
         "width": 800,
         "height": 600
       }
