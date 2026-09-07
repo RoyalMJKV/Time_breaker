@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { playChime } from '../utils/audio';
+import { sendDesktopNotification } from '../utils/notifications';
 
 export type TimerStatus = 'IDLE' | 'RUNNING' | 'PAUSED';
 export type TimerMode = 'WORK' | 'BREAK';
@@ -68,10 +70,14 @@ export function TimerProvider({ children }: { children: React.ReactNode }) {
           setMode('BREAK');
           setEndTime(Date.now() + BREAK_DURATION * 1000);
           setRemainingSeconds(BREAK_DURATION);
+          playChime();
+          sendDesktopNotification("Break Time!", "Look 20 feet away for 20 seconds.");
         } else {
           setMode('WORK');
           setEndTime(Date.now() + WORK_DURATION * 1000);
           setRemainingSeconds(WORK_DURATION);
+          playChime();
+          sendDesktopNotification("Focus Time!", "Your eye rest is complete.");
         }
       }
     }, 200);
