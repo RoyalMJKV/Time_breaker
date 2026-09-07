@@ -1,32 +1,61 @@
+import { useSettings } from '../context/SettingsContext';
+
 export default function Settings() {
+  const { settings, updateSettings, isLoading } = useSettings();
+
+  if (isLoading) return <div className="p-8">Loading...</div>;
+
   return (
     <div className="p-8 h-full flex flex-col">
       <h1 className="text-3xl font-bold mb-6">Settings</h1>
       
-      <div className="flex-1 glass-panel bg-black/10 p-6 rounded-xl border-none space-y-6">
+      <div className="flex-1 glass-panel bg-black/10 p-8 rounded-xl border-none space-y-8 overflow-y-auto">
         <div>
-          <h2 className="text-xl font-semibold mb-4 border-b border-white/10 pb-2">Reminder</h2>
-          <div className="flex items-center justify-between py-2">
-            <span>Interval (Minutes)</span>
-            <span className="text-white/70">20</span>
-          </div>
-          <div className="flex items-center justify-between py-2">
-            <span>Break Duration (Seconds)</span>
-            <span className="text-white/70">25</span>
-          </div>
-        </div>
+          <h2 className="text-xl font-semibold mb-6 border-b border-white/10 pb-2">Timer Configuration</h2>
+          
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium text-lg">Focus Interval (Minutes)</p>
+                <p className="text-sm text-white/50">Time before you take a break.</p>
+              </div>
+              <input 
+                type="number" 
+                min="1" max="120"
+                value={settings.workDurationMinutes}
+                onChange={(e) => updateSettings({ workDurationMinutes: parseInt(e.target.value) || 20 })}
+                className="bg-black/20 border border-white/10 rounded-lg px-4 py-2 w-24 text-right text-lg outline-none focus:border-cyan-500 transition-colors"
+              />
+            </div>
 
-        <div>
-          <h2 className="text-xl font-semibold mb-4 border-b border-white/10 pb-2">System</h2>
-          <div className="flex items-center justify-between py-2">
-            <span>Start on Boot</span>
-            <div className="w-12 h-6 bg-white/20 rounded-full"></div>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium text-lg">Break Duration (Seconds)</p>
+                <p className="text-sm text-white/50">How long you should look away.</p>
+              </div>
+              <input 
+                type="number" 
+                min="5" max="300"
+                value={settings.breakDurationSeconds}
+                onChange={(e) => updateSettings({ breakDurationSeconds: parseInt(e.target.value) || 25 })}
+                className="bg-black/20 border border-white/10 rounded-lg px-4 py-2 w-24 text-right text-lg outline-none focus:border-emerald-500 transition-colors"
+              />
+            </div>
           </div>
         </div>
         
-        <p className="text-center text-white/40 text-sm mt-8">
-          Functional settings will be implemented in Phase 4.
-        </p>
+        <div>
+          <h2 className="text-xl font-semibold mb-6 border-b border-white/10 pb-2">System (Phase 5)</h2>
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="font-medium text-lg">Start on Boot</p>
+              <p className="text-sm text-white/50">Launch silently in system tray.</p>
+            </div>
+            <div className="w-12 h-6 bg-white/20 rounded-full cursor-not-allowed opacity-50 relative">
+              <div className="w-5 h-5 bg-white rounded-full absolute left-0.5 top-0.5"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
