@@ -4,11 +4,13 @@ import { getItem, setItem } from '../utils/storage';
 export interface AppSettings {
   workDurationMinutes: number;
   breakDurationSeconds: number;
+  startOnBoot: boolean;
 }
 
 const DEFAULT_SETTINGS: AppSettings = {
   workDurationMinutes: 20,
   breakDurationSeconds: 25,
+  startOnBoot: false,
 };
 
 interface SettingsContextType {
@@ -38,6 +40,10 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
     const updated = { ...settings, ...newSettings };
     setSettings(updated);
     await setItem('preferences', updated, 'settings.json');
+
+    if (newSettings.startOnBoot !== undefined) {
+      import('../utils/autostart').then(({ setAutostart }) => setAutostart(newSettings.startOnBoot!));
+    }
   };
 
   return (

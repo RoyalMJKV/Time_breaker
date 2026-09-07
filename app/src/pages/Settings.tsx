@@ -45,15 +45,18 @@ export default function Settings() {
         </div>
         
         <div>
-          <h2 className="text-xl font-semibold mb-6 border-b border-white/10 pb-2">System (Phase 5)</h2>
+          <h2 className="text-xl font-semibold mb-6 border-b border-white/10 pb-2">System Integrations</h2>
           <div className="flex items-center justify-between">
             <div>
               <p className="font-medium text-lg">Start on Boot</p>
               <p className="text-sm text-white/50">Launch silently in system tray.</p>
             </div>
-            <div className="w-12 h-6 bg-white/20 rounded-full cursor-not-allowed opacity-50 relative">
-              <div className="w-5 h-5 bg-white rounded-full absolute left-0.5 top-0.5"></div>
-            </div>
+            <button 
+              onClick={() => updateSettings({ startOnBoot: !settings.startOnBoot })}
+              className={`w-12 h-6 rounded-full relative transition-colors duration-300 ${settings.startOnBoot ? 'bg-emerald-500' : 'bg-white/20'}`}
+            >
+              <div className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-all duration-300 ${settings.startOnBoot ? 'left-6' : 'left-0.5'}`}></div>
+            </button>
           </div>
         </div>
       </div>
