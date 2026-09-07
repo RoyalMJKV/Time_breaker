@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-glass: rgba(255, 255, 255, 0.1);
+  --color-glass-border: rgba(255, 255, 255, 0.2);
+}
+
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 text-white min-h-screen m-0 font-sans;
+  }
+  
+  #root {
+    @apply h-screen w-screen flex overflow-hidden;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/10 backdrop-blur-xl border border-white/20 shadow-xl;
+  }
+}
