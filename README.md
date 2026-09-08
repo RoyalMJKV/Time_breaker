@@ -1,2 +1,2 @@
 # Time_breaker
-this repo is basically builf for a time breaker focusing giving periodic rest to our eyes and maintain a proper intervals while working
+this repo is basically builf for a time breaker focusing giving periodic rest to our eyes and maintain a proper intervals while working... 
